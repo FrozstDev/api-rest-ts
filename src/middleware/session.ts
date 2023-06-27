@@ -9,7 +9,7 @@ const checkSession = (req: RequestExt, res: Response, next: NextFunction) => {
     if (!authorizationValue) return handleHttpErrorResponse(res, 'TOKEN DON\nt SEND', 401)
 
     const jwt = authorizationValue.split(' ').pop()
-    const isUser = verifyToken(`${jwt}`)
+    const isUser = verifyToken(`${jwt}`) as { id: string }
     if (!isUser) handleHttpErrorResponse(res, 'INVALID_TOKEN', 401)
 
     req.user = isUser
